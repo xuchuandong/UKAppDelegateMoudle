@@ -1,13 +1,72 @@
-# UKAppDelegateMoudle
+# 三方库和AppDelegate交互封装
 
-[![CI Status](https://img.shields.io/travis/chuandong.xu/UKAppDelegateMoudle.svg?style=flat)](https://travis-ci.org/chuandong.xu/UKAppDelegateMoudle)
-[![Version](https://img.shields.io/cocoapods/v/UKAppDelegateMoudle.svg?style=flat)](https://cocoapods.org/pods/UKAppDelegateMoudle)
-[![License](https://img.shields.io/cocoapods/l/UKAppDelegateMoudle.svg?style=flat)](https://cocoapods.org/pods/UKAppDelegateMoudle)
-[![Platform](https://img.shields.io/cocoapods/p/UKAppDelegateMoudle.svg?style=flat)](https://cocoapods.org/pods/UKAppDelegateMoudle)
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+```
+// AppDelegate
+import UKAppDelegateMoudle
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    override init() {
+        AppDelegate.setuAppHandler()
+        super.init()
+    }
+    
+    class func setuAppHandler() {
+        UKHandlerFactory.register(handler: UKAppDelegateHandler.shared, protocol: UKAppDelegateProtocol.self)
+        UKAppDelegateHandler.shared.setUp(thirdLib: UKJiguangHandler())
+    }
+    
+    static let appDelegateHandler: UKAppDelegateProtocol = {
+        let handler = UKHandlerFactory.handler(for: UKAppDelegateProtocol.self) as! UKAppDelegateProtocol
+        return handler
+    }()
+    
+
+    var window: UIWindow?
+
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    
+        return AppDelegate.appDelegateHandler.application?(application, didFinishLaunchingWithOptions: launchOptions) ?? true
+    }
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        AppDelegate.appDelegateHandler.applicationWillResignActive?(application)
+    }
+}
+```
+
+```
+// Handler
+import UKAppDelegateMoudle
+
+class UKJiguangHandler: NSObject, UKAppDelegateProtocol {
+    func syncMainApplication(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        initJiguangSync()
+    }
+
+    func asyncMainApplication(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        initJiguangAsync()
+    }
+}
+
+// UKAppDelegateProtocol
+extension UKJiguangHandler {
+    
+
+}
+
+// AppDelegate
+extension UKJiguangHandler {
+    func applicationWillResignActive(_ application: UIApplication) {
+        print("")
+    }
+}
+```
 
 ## Requirements
 
@@ -22,7 +81,7 @@ pod 'UKAppDelegateMoudle'
 
 ## Author
 
-chuandong.xu, chuandong.xu@uking.com
+chardxu, 1007034110@qq.com
 
 ## License
 

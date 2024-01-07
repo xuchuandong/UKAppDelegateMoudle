@@ -1,0 +1,6 @@
+framework module UKAppDelegateMoudle {
+  umbrella header "UKAppDelegateMoudle-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module UKThreadSafeObjc {
+  umbrella header "UKThreadSafeObjc-umbrella.h"
+
+  export *
+  module * { export * }
+}

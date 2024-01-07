@@ -9,34 +9,23 @@
 Pod::Spec.new do |s|
   s.name             = 'UKAppDelegateMoudle'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of UKAppDelegateMoudle.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.summary          = 'AppDelegate三方库逻辑封装'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+处理AppDelegate里各种三方库冗余混乱问题
+新建三方库管理类，封装遵循协议的类，可以在类里单独处理各自的逻辑
                        DESC
 
-  s.homepage         = 'https://github.com/chuandong.xu/UKAppDelegateMoudle'
+  s.homepage         = 'https://github.com/xuchuandong/UKAppDelegateMoudle'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'chuandong.xu' => 'chuandong.xu@uking.com' }
-  s.source           = { :git => 'https://github.com/chuandong.xu/UKAppDelegateMoudle.git', :tag => s.version.to_s }
+  s.author           = { 'chardxu' => '1007034110@qq.com' }
+  s.source           = { :git => 'https://github.com/xuchuandong/UKAppDelegateMoudle.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
-  s.ios.deployment_target = '10.0'
-
-  s.source_files = 'UKAppDelegateMoudle/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'UKAppDelegateMoudle' => ['UKAppDelegateMoudle/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.ios.deployment_target = '10.0'
+  s.source_files = 'UKAppDelegateMoudle/Classes/*'
+  #s.public_header_files = 'UKAppDelegateMoudle/Classes/*.swift'
+  
+  s.dependency 'UKThreadSafeObjc' #, '~> 0.1.0'
 end
